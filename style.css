@@ -1,0 +1,325 @@
+/* ================================
+   MODERN CALCULATOR
+   ================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --background: #0b0f14;
+  --calculator: #151a21;
+  --display: #0d1117;
+
+  --number-button: #202731;
+  --number-hover: #2b3440;
+
+  --function-button: #343d49;
+  --function-hover: #414c59;
+
+  --operator-button: #26384b;
+  --operator-hover: #344c64;
+
+  --equals: #4d7cff;
+  --equals-hover: #638cff;
+
+  --text: #ffffff;
+  --secondary-text: #8994a3;
+}
+
+body {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(77, 124, 255, 0.15),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(70, 200, 160, 0.08),
+      transparent 30%
+    ),
+    var(--background);
+
+  color: var(--text);
+}
+
+/* ================================
+   CALCULATOR
+   ================================ */
+
+.calculator {
+  width: 100%;
+  max-width: 420px;
+
+  padding: 18px;
+
+  background: rgba(21, 26, 33, 0.95);
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 28px;
+
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
+
+  backdrop-filter: blur(15px);
+}
+
+/* ================================
+   DISPLAY
+   ================================ */
+
+.display {
+  min-height: 150px;
+
+  padding: 22px;
+
+  margin-bottom: 16px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: flex-end;
+  align-items: flex-end;
+
+  background: var(--display);
+
+  border-radius: 20px;
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  overflow: hidden;
+}
+
+#previous-display {
+  width: 100%;
+
+  min-height: 25px;
+
+  text-align: right;
+
+  color: var(--secondary-text);
+
+  font-size: 15px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+#current-display {
+  width: 100%;
+
+  margin-top: 8px;
+
+  text-align: right;
+
+  font-size: clamp(40px, 9vw, 60px);
+
+  font-weight: 600;
+
+  letter-spacing: -2px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+/* ================================
+   BUTTON GRID
+   ================================ */
+
+.buttons {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 10px;
+}
+
+/* ================================
+   BUTTONS
+   ================================ */
+
+button {
+  height: 72px;
+
+  border: none;
+
+  border-radius: 18px;
+
+  background: var(--number-button);
+
+  color: var(--text);
+
+  font-size: 21px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+
+  transition:
+    transform 0.12s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+/* Hover */
+
+button:hover {
+  background: var(--number-hover);
+
+  transform: translateY(-2px);
+}
+
+/* Click */
+
+button:active {
+  transform: translateY(2px) scale(0.96);
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Keyboard focus */
+
+button:focus-visible {
+  outline: 3px solid rgba(99, 140, 255, 0.6);
+
+  outline-offset: 2px;
+}
+
+/* ================================
+   FUNCTION BUTTONS
+   ================================ */
+
+.function {
+  background: var(--function-button);
+}
+
+.function:hover {
+  background: var(--function-hover);
+}
+
+/* ================================
+   OPERATORS
+   ================================ */
+
+.operator {
+  background: var(--operator-button);
+
+  color: #bdd3ff;
+}
+
+.operator:hover {
+  background: var(--operator-hover);
+}
+
+/* ================================
+   EQUALS
+   ================================ */
+
+.equals {
+  background: var(--equals);
+
+  color: white;
+}
+
+.equals:hover {
+  background: var(--equals-hover);
+}
+
+/* ================================
+   ERROR ANIMATION
+   ================================ */
+
+.calculator.error {
+  animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-6px);
+  }
+
+  50% {
+    transform: translateX(6px);
+  }
+
+  75% {
+    transform: translateX(-6px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* ================================
+   MOBILE
+   ================================ */
+
+@media (max-width: 450px) {
+  body {
+    padding: 10px;
+  }
+
+  .calculator {
+    padding: 12px;
+
+    border-radius: 22px;
+  }
+
+  .display {
+    min-height: 130px;
+
+    padding: 18px;
+  }
+
+  button {
+    height: 64px;
+
+    border-radius: 15px;
+
+    font-size: 19px;
+  }
+
+  .buttons {
+    gap: 8px;
+  }
+}
+
+/* ================================
+   SMALL HEIGHT SCREENS
+   ================================ */
+
+@media (max-height: 650px) {
+  button {
+    height: 58px;
+  }
+
+  .display {
+    min-height: 115px;
+  }
+}
